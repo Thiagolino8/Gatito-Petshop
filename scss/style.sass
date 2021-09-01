@@ -1,0 +1,52 @@
+$purple: rgba(160,80,190,1.0)
+$white: rgba(234,234,235,1.0)
+$grey: rgba(70,70,70,1.0)
+$yellow: rgba(250,190,80,1.0)
+$img-width: 45%
+$directions: right, left, bottom, top
+$layout-margin-size: 10px
+
+%no-decoration
+    text-decoration: none
+
+%u-decoration
+    text-decoration: underline
+
+@mixin reset
+    margin: 0
+    padding: 0
+    list-style: none
+
+@mixin flx($property, $jty-cnt)
+    display: flex;
+    #{$property}: $jty-cnt;
+
+@mixin for-phone
+    @media (max-width: 767px) {@content}
+
+@mixin for-tablet
+    @media (min-width: 767px) and (max-width:1199px) {@content}
+
+@mixin for-desktop
+    @media (min-width: 1200px) {@content}
+
+@mixin fontSize($size)
+    font-size: calcRem($size)
+
+@function calcRem($size)
+    @return $size / 16px * 1rem
+
+@import 'about', 'article', 'footer', 'header', 'main', 'collection', 'contact'
+
+@each $direction in $directions
+    %no-margin-#{$direction}
+        margin-#{$direction}: 0
+
+    %default-margin-#{$direction}
+        margin-#{$direction}: $layout-margin-size
+
+    %double-margin-#{$direction}
+        margin-#{$direction}: $layout-margin-size * 2
+
+    %half-margin-#{$direction}
+        margin-#{$direction}: $layout-margin-size / 2
